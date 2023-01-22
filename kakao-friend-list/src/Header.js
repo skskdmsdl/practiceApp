@@ -1,7 +1,7 @@
 import { View, Text, StyleSheet } from "react-native";
 import { Ionicons } from '@expo/vector-icons';
 
-const IconButton = (props) => {
+const IconButton = (name) => {
     return (
         <View style={{ paddingHorizontal: 6 }}>
             <Ionicons name={name} size={24} color="black" />
