@@ -4,7 +4,7 @@ import { Ionicons } from '@expo/vector-icons';
 const IconButton = (props) => {
     return (
         <View style={{ paddingHorizontal: 6 }}>
-            <Ionicons name={name.name} size={24} color="black" />
+            <Ionicons name={name} size={24} color="black" />
         </View>
     )
 }
