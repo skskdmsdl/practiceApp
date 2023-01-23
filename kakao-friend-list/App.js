@@ -29,6 +29,9 @@ export default function App() {
         introduction={myProfile.introduction}
       />
 
+      <Margin height={15} />
+      <Division />
+
     </SafeAreaView>
     </SafeAreaProvider>
     
