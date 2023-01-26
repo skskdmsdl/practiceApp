@@ -5,9 +5,9 @@ import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 
 import { friendProfiles, myProfile } from "./src/data";
 import Header from "./src/Header";
-import MyProfile from './src/MyProfile';
+import Profile from './src/Profile';
 import Margin from "./src/Margin";
-import FriendSection from './FriendSection';
+import FriendSection from './src/FriendSection';
 
 const statusBarHeight = getStatusBarHeight(true);
 const bottomSpace = getBottomSpace();
@@ -28,7 +28,7 @@ export default function App() {
 
       <Margin height={10} />
 
-      <MyProfile
+      <Profile
         uri={myProfile.uri}
         name={myProfile.name}
         introduction={myProfile.introduction}
@@ -45,6 +45,10 @@ export default function App() {
         onPressArrow={onPressArrow}
       />
 
+      <FriendList 
+        data={friendProfiles} 
+      />
+
     </SafeAreaView>
     </SafeAreaProvider>
     
@@ -59,5 +63,6 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingTop: statusBarHeight,
     backgroundColor: '#fff',
+    paddingHorizontal: 15,
   },
 });
