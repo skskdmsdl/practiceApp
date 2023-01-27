@@ -8,7 +8,7 @@ export default (props) => {
       <Text style={{ color: "grey" }}>친구 {props.friendProfileLen}</Text>
 
       <TouchableOpacity onPress={props.onPressArrow}>
-        <MaterialIcons name="keyboard-arrow-down" size={24} color="lightgrey" />
+        <MaterialIcons name={props.isOpened ? "keyboard-arrow-up" : "keyboard-arrow-down"} size={24} color="lightgrey" />
       </TouchableOpacity>
     </View>
   )

@@ -16,8 +16,10 @@ console.log(`${Platform.OS}: ${statusBarHeight}, ${bottomSpace}`);
 
 
 export default function App() {
+  const [isOpened, setIsOpened] = useState(true);
+
   const onPressArrow = () => {
-    console.log('clicked arrow');
+    setIsOpened(!isOpened);
   }
 
   return (
@@ -43,11 +45,10 @@ export default function App() {
       <FriendSection
         friendProfileLen={friendProfiles.length} 
         onPressArrow={onPressArrow}
+        isOpened={isOpened}
       />
 
-      <FriendList 
-        data={friendProfiles} 
-      />
+      <FriendList data={friendProfiles} isOpened={isOpened} />
 
     </SafeAreaView>
     </SafeAreaProvider>
