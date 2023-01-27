@@ -8,6 +8,7 @@ import Header from "./src/Header";
 import Profile from './src/Profile';
 import Margin from "./src/Margin";
 import FriendSection from './src/FriendSection';
+import FriendSection from './src/TabBar';
 
 const statusBarHeight = getStatusBarHeight(true);
 const bottomSpace = getBottomSpace();
@@ -17,6 +18,7 @@ console.log(`${Platform.OS}: ${statusBarHeight}, ${bottomSpace}`);
 
 export default function App() {
   const [isOpened, setIsOpened] = useState(true);
+  const [selectedTabIdx, setSelectedTabIdx] = useState(0);
 
   const onPressArrow = () => {
     setIsOpened(!isOpened);
@@ -24,38 +26,43 @@ export default function App() {
 
   return (
     // SafeAreaView는 상단바 영역 이후부터 View가 그려짐 (하단 탭바때문에 사용 안할 예정-react-native 라이브러리)
-    <SafeAreaProvider >
-    <SafeAreaView style={styles.container} edges={['right', 'bottom', 'left']}>
-      <Header />
+    <View style={styles.container}>
+      <View style={{
+        flex: 1,
+        paddingHorizontal: 15,
+        }}>
 
-      <Margin height={10} />
+        <Header />
 
-      <Profile
-        uri={myProfile.uri}
-        name={myProfile.name}
-        introduction={myProfile.introduction}
+        <Margin height={10} />
+
+        <Profile
+          uri={myProfile.uri}
+          name={myProfile.name}
+          introduction={myProfile.introduction}
+        />
+
+        <Margin height={15} />
+
+        <Division />
+
+        <Margin height={12} />
+
+        <FriendSection
+          friendProfileLen={friendProfiles.length} 
+          onPressArrow={onPressArrow}
+          isOpened={isOpened}
+        />
+
+        <FriendList data={sfriendProfiles} isOpened={isOpened} />
+      </View>
+
+      <TabBar 
+        selectedTabIdx={selectedTabIdx}
+        setSelectedTabIdx={setSelectedTabIdx}
       />
+    </View>  
 
-      <Margin height={15} />
-
-      <Division />
-
-      <Margin height={12} />
-
-      <FriendSection
-        friendProfileLen={friendProfiles.length} 
-        onPressArrow={onPressArrow}
-        isOpened={isOpened}
-      />
-
-      <FriendList data={friendProfiles} isOpened={isOpened} />
-
-    </SafeAreaView>
-    </SafeAreaProvider>
-    
-    // <View style={styles.container}>
-    //   <Header />
-    // </View>
   );
 }
 
