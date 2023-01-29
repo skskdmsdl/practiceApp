@@ -50,17 +50,24 @@ const Button = ({ text, onPress, flex, type, isSelected }) => {
     /* padding: 1px 2px 3px 4px; // top right botoom left */
   `;
   
-  export default () => {
+export default () => {
     const [input, setInput] = useState(0); // 2 -> 14
     const [currentOperator, setCurrentOperator] = useState(null); // + -> null
     const [result, setResult] = useState(null); // 12 -> 14
     const [tempInput, setTempInput] = useState(null); // 2
     const [tempOperator, setTempOperator] = useState(null); // +
+    const [isClickedOperator, setIsClickedOperator] = useState(false);
+    const [isClickedEqual, setIsClickedEqual] = useState(false);
+  
+    // const hasInput = input ? true : false;
+    // 어떤 값을 boolean값 으로 변환 시키고 싶을 때 !!로 가능(삼항 연산자보다 간단하고 가독성 높음)
+    const hasInput = !!input;
   
     const onPressNum = (num) => {
-      if (currentOperator) {
+      if (currentOperator && isClickedOperator) {
         setResult(input);
         setInput(num);
+        setIsClickedOperator(false);
       } else {
         // const newInput = input + num // bad case
         const newInput = Number(`${input}${num}`) // good case
@@ -71,35 +78,47 @@ const Button = ({ text, onPress, flex, type, isSelected }) => {
     const onPressOperator = (operator) => {
       if (operator !== "=") {
         setCurrentOperator(operator);
+        setIsClickedOperator(true);
+        setIsClickedEqual(false);
       } else {
         let finalResult = result;
-        switch (currentOperator) {
+        const finalInput = isClickedEqual ? tempInput : input;
+        const finalOperator = isClickedEqual ? tempOperator : currentOperator;
+        switch (finalOperator) {
           case '+':
-            finalResult = result + input;
+            finalResult = result + finalInput;
             break;
           case '-':
-            finalResult = result - input;
+            finalResult = result - finalInput;
             break;
           case '*':
-            finalResult = result * input;
+            finalResult = result * finalInput;
             break;
           case '/':
-            finalResult = result / input;
+            finalResult = result / finalInput;
             break;
           default:
             break;
         }
         setResult(finalResult);
         setInput(finalResult);
+        setTempInput(finalInput);
+        setCurrentOperator(null);
+        setTempOperator(finalOperator);
+        setIsClickedEqual(true);
       }
     }
   
     const onPressReset = () => {
-      setInput(0);
-      setCurrentOperator(null);
-      setResult(null);
-      setTempInput(null);
-      setTempOperator(null);
+      if (hasInput) {
+        setInput(0);
+      } else {
+        setInput(0);
+        setCurrentOperator(null);
+        setResult(null);
+        setTempInput(null);
+        setTempOperator(null);
+      }
     }
   
     return (
@@ -119,7 +138,7 @@ const Button = ({ text, onPress, flex, type, isSelected }) => {
         <ButtonContainer>
           <Button
             type="reset"
-            text="AC"
+            text={hasInput ? "C" : "AC"}
             onPress={onPressReset}
             flex={3}
           />
