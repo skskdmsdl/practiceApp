@@ -82,24 +82,15 @@ export default () => {
 
       {/* [7 ~ x] */}
       <ButtonContainer>
-        <Button
-          type="num"
-          text="7"
-          onPress={() => null}
-          flex={1}
-        />
-        <Button
-          type="num"
-          text="8"
-          onPress={() => null}
-          flex={1}
-        />
-        <Button
-          type="num"
-          text="9"
-          onPress={() => null}
-          flex={1}
-        />
+        {[7, 8, 9].map((num) => (
+          <Button
+            key={`num-${num}`}
+            type="num"
+            text={`${num}`}
+            onPress={() => onPressNum(num)}
+            flex={1}
+          />
+        ))}
         <Button
           type="operator"
           text="X"
@@ -110,24 +101,15 @@ export default () => {
 
       {/* [4 ~ -] */}
       <ButtonContainer>
-        <Button
-          type="num"
-          text="4"
-          onPress={() => null}
-          flex={1}
-        />
-        <Button
-          type="num"
-          text="5"
-          onPress={() => null}
-          flex={1}
-        />
-        <Button
-          type="num"
-          text="6"
-          onPress={() => null}
-          flex={1}
-        />
+        {[4, 5, 6].map((num) => (
+          <Button
+            key={`num-${num}`}
+            type="num"
+            text={`${num}`}
+            onPress={() => onPressNum(num)}
+            flex={1}
+          />
+        ))}
         <Button
           type="operator"
           text="-"
@@ -138,24 +120,15 @@ export default () => {
 
       {/* [1 ~ +] */}
       <ButtonContainer>
-        <Button
-          type="num"
-          text="1"
-          onPress={() => null}
-          flex={1}
-        />
-        <Button
-          type="num"
-          text="2"
-          onPress={() => null}
-          flex={1}
-        />
-        <Button
-          type="num"
-          text="3"
-          onPress={() => null}
-          flex={1}
-        />
+        {[1, 2, 3].map((num) => (
+          <Button
+            key={`num-${num}`}
+            type="num"
+            text={`${num}`}
+            onPress={() => onPressNum(num)}
+            flex={1}
+          />
+        ))}
         <Button
           type="operator"
           text="+"
